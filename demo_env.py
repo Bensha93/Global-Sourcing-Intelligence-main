@@ -110,20 +110,34 @@ search = requests.get("https://serpapi.com/search", params=params)
 response = search.json()
 
 # Debug: Print the full API response
-print(json.dumps(response, indent=2))
+# print(json.dumps(response, indent=2))
 
 products = []
 for result in response.get("shopping_results", []):
-    title = result.get('title')
+    title = result.get('title', '')
     price = result.get("extracted_price") or result.get("price")
     link = result.get("link")
-    product_data = {
+    products.append({
         "Title": title,
         "Price": price,
         "Link": link
-    }
-    products.append(product_data)
+    })
 
-# --- Output Results ---
-product_df = pd.DataFrame(products)
-print(product_df.head(5)) 
+# Filter: Only include products where the title contains all non-empty user-specified fields (case-insensitive)
+def matches_criteria(product, name, memory, color):
+    title = product["Title"].lower()
+    if name and name.lower() not in title:
+        return False
+    if memory and memory.lower() not in title:
+        return False
+    if color and color.lower() not in title:
+        return False
+    return True
+
+filtered_products = [
+    p for p in products
+    if matches_criteria(p, product_name, memory, product_color)
+]
+
+product_df = pd.DataFrame(filtered_products)
+print(product_df.head(100)) 
