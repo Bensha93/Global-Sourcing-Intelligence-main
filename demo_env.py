@@ -141,3 +141,31 @@ filtered_products = [
 
 product_df = pd.DataFrame(filtered_products)
 print(product_df.head(100)) 
+
+
+
+# Step 2: Analyze the data
+ #step 2.1: Analyze the data (Average price, Median price, Min price, Max price)
+ Average_price = product_df["Price"].mean()
+ Median_price = product_df["Price"].median()
+ Min_price = product_df["Price"].min()
+ Max_price = product_df["Price"].max()
+
+ print(f"Average price: {Average_price}")
+ print(f"Median price: {Median_price}")
+ print(f"Min price: {Min_price}")
+ #step 2.2: Analyze the data
+ #step 2.3: Analyze the data
+ #step 2.4: Analyze the data
+ #step 2.5: Analyze the data
+ #step 2.6: Analyze the data
+ #step 2.7: Analyze the data
+
+
+# Step 3: Generate a report
+
+# Step 4: Save the report
+
+# Step 5: Send the report to the user
+
+# Step 6: Save the report to a file
