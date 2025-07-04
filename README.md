@@ -110,5 +110,29 @@ This is a **Python-based project blueprint** — simple to expand with:
 
 ---
 
+## 🚦 Project Progress
+
+### ✅ Completed
+- Environment variable management for API keys (.env, python-dotenv)
+- Integration with SerpAPI for product price scraping
+- Country/domain lookup using Wikidata and DuckDB
+- Flexible, case-insensitive country matching
+- Product filtering based on user-specified criteria (name, memory, color)
+- Robust average function for meaningful price analysis (mean/median/mode selection)
+- Demo and playground scripts for data analysis and testing
+- requirements.txt updated for all dependencies
+
+### 🔜 To Do
+- Generate and format analysis reports (Step 3 in demo_env.py)
+- Save reports to files (Step 4)
+- Implement user notification or report delivery (Step 5)
+- Add more comprehensive error handling and logging
+- Expand data validation and integrity checks
+- Build a user interface or dashboard (optional/future)
+- Add more unit and integration tests
+- Improve documentation and usage examples
+
+---
+
 ## 📁 File Structure (Example)
 
