@@ -50,6 +50,33 @@ The goal is simple: **Buy smart, sell smart, and protect your margins**.
 
 ---
 
+## 📊 Robust Average for Price Analysis
+
+### What is Robust Average?
+The `robust_average` function is a reusable Python module that intelligently selects the most meaningful average (mean, median, or mode) for a set of prices. It analyzes the data for outliers and skewness, then chooses the best statistical measure to represent the "typical" price, ensuring results are not distorted by extreme values or unusual distributions.
+
+### Why Integrate Robust Average?
+- **Real-world price data is often messy:** Scraped prices from APIs or the web can include outliers, errors, or highly skewed distributions.
+- **Standard mean can be misleading:** A few very high or low prices can distort the mean, making it unrepresentative of what most buyers actually pay.
+- **Business and legal accuracy:** In contracts, reporting, or compliance, using a misleading average can have legal or financial consequences. The robust average ensures you report the most defensible and meaningful value.
+
+### Benefits
+- **Automatic selection:** No need to manually inspect data for outliers or skewness—the function does it for you.
+- **Transparency:** Returns the method used (mean, median, or mode) and supporting statistics, so you can justify your results.
+- **Reusability:** Can be used in any project or analysis where robust, reliable price statistics are needed.
+- **Better decision-making:** Ensures that pricing, negotiation, and reporting are based on the most representative data, not distorted by anomalies.
+
+### Example Usage
+```python
+from robust_average import robust_average
+prices = [97.87, 109.99, 129.99, 89.99, 119.99, 500.00]
+result = robust_average(prices)
+print(result)
+# Output: {'value': 109.99, 'method': 'median', ...}
+```
+
+---
+
 ## ⚙️ Tech Stack
 
 This is a **Python-based project blueprint** — simple to expand with:

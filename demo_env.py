@@ -11,6 +11,7 @@ import pandas as pd
 from dotenv import load_dotenv
 from SPARQLWrapper import SPARQLWrapper, JSON
 import duckdb
+from robust_average import robust_average
 
 # Load environment variables from .env file
 load_dotenv()
@@ -30,7 +31,7 @@ product_condition = input("Enter Product Condition (e.g., New or Used): ")
 product_color = input("Enter Product color (e.g., Gold or Blue): ")
 location_query = input("Enter search location (e.g., Nigeria): ")
 retail_store = input("Enter Retail store (e.g, google): ")
-desired_price_count = 10
+desired_price_count = 100
 
 # --- 2. Build query ---
 sparql = SPARQLWrapper("https://query.wikidata.org/sparql")
@@ -101,7 +102,7 @@ params = {
     "google_domain": search_domain,
     "gl": search_lan,
     "hl": "en",
-    "num": "100",
+    "num": desired_price_count,
     "uds": filter_string,
     "tbm": "shop"
 }
@@ -140,20 +141,17 @@ filtered_products = [
 ]
 
 product_df = pd.DataFrame(filtered_products)
-print(product_df.head(100)) 
 
+# Check for 'Price' column before analysis
+if "Price" in product_df.columns and not product_df["Price"].empty:
+    price_average = robust_average(product_df["Price"])
+    print(f"Robust average: {price_average['value']} (method: {price_average['method']})")
+else:
+    print("No 'Price' data available for robust average analysis.")
 
 
 # Step 2: Analyze the data
  #step 2.1: Analyze the data (Average price, Median price, Min price, Max price)
- Average_price = product_df["Price"].mean()
- Median_price = product_df["Price"].median()
- Min_price = product_df["Price"].min()
- Max_price = product_df["Price"].max()
-
- print(f"Average price: {Average_price}")
- print(f"Median price: {Median_price}")
- print(f"Min price: {Min_price}")
  #step 2.2: Analyze the data
  #step 2.3: Analyze the data
  #step 2.4: Analyze the data
