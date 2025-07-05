@@ -112,7 +112,7 @@ This is a **Python-based project blueprint** — simple to expand with:
 
 ## 🚀 How It Works (Flow)
 
-1. **STEP 1**: User inputs product details (name, SKU, VIN, year, weight, memory, size, quantity, destination, shipping method).
+1. **STEP 1**: User inputs product details (name, SKU, year, weight, memory, size, quantity, destination, shipping method).
 2. **STEP 2**: System fetches market retail prices, shipping costs, and FX rates.
 3. **STEP 3**: Calculates total landed costs, profit margin, and walk-away price.
 4. **STEP 4**: Compares multiple supplier offers and ranks them.
