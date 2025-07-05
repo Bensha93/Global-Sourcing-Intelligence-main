@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "robust-average"
-version = "0.1.2"
+version = "0.1.3"
 description = "A Python package that intelligently selects the most robust average (mean, median, or mode) for price analysis"
 readme = "robust_average/README.md"
 license = "MIT"
