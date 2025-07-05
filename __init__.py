@@ -7,7 +7,7 @@ A Python package that intelligently selects the most robust average
 
 from .robust_average import robust_average
 
-__version__ = "0.1.0"
+__version__ = "0.1.2"
 __author__ = "Ben"
 __email__ = "ben@example.com"
 
