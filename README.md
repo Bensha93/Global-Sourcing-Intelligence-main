@@ -53,7 +53,7 @@ The goal is simple: **Buy smart, sell smart, and protect your margins**.
 ## 📊 Robust Average for Price Analysis
 
 ### What is Robust Average?
-The `robust_average` function is a reusable Python module that intelligently selects the most meaningful average (mean, median, or mode) for a set of prices. It analyzes the data for outliers and skewness, then chooses the best statistical measure to represent the "typical" price, ensuring results are not distorted by extreme values or unusual distributions.
+The `robust_average` function is a reusable Python module that intelligently selects the most meaningful average (mean, median, or mode) for a list/Series of prices. It analyzes the data for outliers and skewness, then chooses the best statistical measure to represent the "typical" price, ensuring results are not distorted by extreme values or unusual distributions.
 
 ### Why Integrate Robust Average?
 - **Real-world price data is often messy:** Scraped prices from APIs or the web can include outliers, errors, or highly skewed distributions.
@@ -65,6 +65,29 @@ The `robust_average` function is a reusable Python module that intelligently sel
 - **Transparency:** Returns the method used (mean, median, or mode) and supporting statistics, so you can justify your results.
 - **Reusability:** Can be used in any project or analysis where robust, reliable price statistics are needed.
 - **Better decision-making:** Ensures that pricing, negotiation, and reporting are based on the most representative data, not distorted by anomalies.
+
+### Decision Logic
+The function uses a systematic approach to select the most appropriate average:
+
+1. **Outlier Detection (IQR Method):**
+   - Calculates Q1 (25th percentile) and Q3 (75th percentile)
+   - Defines outliers as values outside [Q1 - 1.5×IQR, Q3 + 1.5×IQR]
+   - IQR = Q3 - Q1
+
+2. **Skewness Analysis:**
+   - Calculates the skewness coefficient using scipy.stats.skew()
+   - Skewness measures the asymmetry of the data distribution
+   - Values close to 0 indicate symmetric distribution
+
+3. **Decision Criteria:**
+   - **Use MEAN if:** No outliers AND |skewness| < 0.5 (symmetric, clean data)
+   - **Use MEDIAN if:** Outliers present OR |skewness| ≥ 0.5 (skewed or contaminated data)
+   - **Use MODE if:** A single value appears in >50% of the dataset (dominant price point)
+
+4. **Mathematical Foundation:**
+   - **Mean:** Best for normally distributed data without outliers
+   - **Median:** Robust to outliers and skewed distributions
+   - **Mode:** Most frequent value, useful for discrete price points
 
 ### Example Usage
 ```python
